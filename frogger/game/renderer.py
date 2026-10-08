@@ -26,7 +26,7 @@ COLOR_VEHICLE = (220, 80, 70)
 COLOR_TEXT = (255, 255, 255)
 
 
-def draw_scene(surface, frog, vehicles):
+def draw_scene(surface, frog, vehicles, frog_visible=True):
     surface.fill(COLOR_BG)
 
     for row in range(GRID_ROWS):
@@ -42,7 +42,8 @@ def draw_scene(surface, frog, vehicles):
     for v in vehicles:
         pygame.draw.rect(surface, COLOR_VEHICLE, v.get_rect(CELL_SIZE), border_radius=6)
 
-    pygame.draw.rect(surface, COLOR_FROG, frog.get_rect(CELL_SIZE), border_radius=8)
+    if frog_visible:
+        pygame.draw.rect(surface, COLOR_FROG, frog.get_rect(CELL_SIZE), border_radius=8)
 
 
 def draw_text(surface, font, text, pos, color=COLOR_TEXT):
@@ -52,4 +53,5 @@ def draw_text(surface, font, text, pos, color=COLOR_TEXT):
 def draw_banner(surface, font, text):
     surf = font.render(text, True, (255, 220, 80))
     rect = surf.get_rect(center=(surface.get_width() // 2, surface.get_height() // 2))
+    pygame.draw.rect(surface, (0, 0, 0), rect.inflate(24, 16), border_radius=6)
     surface.blit(surf, rect)
